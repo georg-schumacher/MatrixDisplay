@@ -47,7 +47,7 @@ namespace MatrixDisplay
             int g = (int)numGruen.Value;
             int b = (int)numBlau.Value;
 
-            // neu farbe übernehemn
+            // neu farbe Ã¼bernehemn
             led.SetzeFarbe(r, g, b);
 
             led.Umschalten();
@@ -90,10 +90,9 @@ namespace MatrixDisplay
             matrixDisplay.Invalidate();
         }
 
-        private void grpText_Enter(object sender, EventArgs e)
+        private void btnScroll_Click(object sender, EventArgs e)
         {
-
+            darfScrollen = !darfScrollen;
         }
-
     }
 }

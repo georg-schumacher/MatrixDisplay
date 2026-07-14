@@ -62,7 +62,7 @@
             matrixDisplay.BackColor = Color.Black;
             matrixDisplay.Location = new Point(8, 8);
             matrixDisplay.Name = "matrixDisplay";
-            matrixDisplay.Size = new Size(1167, 100);
+            matrixDisplay.Size = new Size(800, 100);
             matrixDisplay.TabIndex = 0;
             matrixDisplay.Paint += matrixDisplay_Paint;
             matrixDisplay.MouseDown += matrixDisplay_MouseDown;
@@ -88,6 +88,7 @@
             btnScroll.TabIndex = 2;
             btnScroll.Text = "📜\nScrollen\n[Rotieren]\n(Software Emulation)";
             btnScroll.UseVisualStyleBackColor = true;
+            btnScroll.Click += btnScroll_Click;
             // 
             // grpColor
             // 
@@ -100,9 +101,9 @@
             grpColor.Controls.Add(numRot);
             grpColor.Font = new Font("Segoe UI Emoji", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
             grpColor.Location = new Point(370, 114);
-            grpColor.Margin = new Padding(2, 2, 2, 2);
+            grpColor.Margin = new Padding(2);
             grpColor.Name = "grpColor";
-            grpColor.Padding = new Padding(2, 2, 2, 2);
+            grpColor.Padding = new Padding(2);
             grpColor.Size = new Size(191, 102);
             grpColor.TabIndex = 3;
             grpColor.TabStop = false;
@@ -111,7 +112,7 @@
             // btnColorDialog
             // 
             btnColorDialog.Location = new Point(145, 24);
-            btnColorDialog.Margin = new Padding(2, 2, 2, 2);
+            btnColorDialog.Margin = new Padding(2);
             btnColorDialog.Name = "btnColorDialog";
             btnColorDialog.Size = new Size(31, 68);
             btnColorDialog.TabIndex = 7;
@@ -156,7 +157,7 @@
             // 
             numBlau.Increment = new decimal(new int[] { 10, 0, 0, 0 });
             numBlau.Location = new Point(86, 70);
-            numBlau.Margin = new Padding(2, 2, 2, 2);
+            numBlau.Margin = new Padding(2);
             numBlau.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numBlau.Name = "numBlau";
             numBlau.Size = new Size(46, 27);
@@ -168,7 +169,7 @@
             // 
             numGruen.Increment = new decimal(new int[] { 10, 0, 0, 0 });
             numGruen.Location = new Point(86, 46);
-            numGruen.Margin = new Padding(2, 2, 2, 2);
+            numGruen.Margin = new Padding(2);
             numGruen.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numGruen.Name = "numGruen";
             numGruen.Size = new Size(46, 27);
@@ -180,7 +181,7 @@
             // 
             numRot.Increment = new decimal(new int[] { 10, 0, 0, 0 });
             numRot.Location = new Point(86, 22);
-            numRot.Margin = new Padding(2, 2, 2, 2);
+            numRot.Margin = new Padding(2);
             numRot.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numRot.Name = "numRot";
             numRot.Size = new Size(46, 27);
@@ -195,9 +196,9 @@
             grpSpeichern.Controls.Add(btnLaden);
             grpSpeichern.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             grpSpeichern.Location = new Point(601, 114);
-            grpSpeichern.Margin = new Padding(2, 2, 2, 2);
+            grpSpeichern.Margin = new Padding(2);
             grpSpeichern.Name = "grpSpeichern";
-            grpSpeichern.Padding = new Padding(2, 2, 2, 2);
+            grpSpeichern.Padding = new Padding(2);
             grpSpeichern.Size = new Size(254, 102);
             grpSpeichern.TabIndex = 4;
             grpSpeichern.TabStop = false;
@@ -217,7 +218,7 @@
             // btnSpeichern
             // 
             btnSpeichern.Location = new Point(139, 30);
-            btnSpeichern.Margin = new Padding(2, 2, 2, 2);
+            btnSpeichern.Margin = new Padding(2);
             btnSpeichern.Name = "btnSpeichern";
             btnSpeichern.Size = new Size(90, 26);
             btnSpeichern.TabIndex = 0;
@@ -227,7 +228,7 @@
             // btnLaden
             // 
             btnLaden.Location = new Point(26, 30);
-            btnLaden.Margin = new Padding(2, 2, 2, 2);
+            btnLaden.Margin = new Padding(2);
             btnLaden.Name = "btnLaden";
             btnLaden.Size = new Size(90, 26);
             btnLaden.TabIndex = 0;
@@ -240,9 +241,9 @@
             grpText.Controls.Add(textBox);
             grpText.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
             grpText.Location = new Point(951, 114);
-            grpText.Margin = new Padding(2, 2, 2, 2);
+            grpText.Margin = new Padding(2);
             grpText.Name = "grpText";
-            grpText.Padding = new Padding(2, 2, 2, 2);
+            grpText.Padding = new Padding(2);
             grpText.Size = new Size(223, 102);
             grpText.TabIndex = 5;
             grpText.TabStop = false;
@@ -252,7 +253,7 @@
             // btnAufModulBringen
             // 
             btnAufModulBringen.Location = new Point(11, 66);
-            btnAufModulBringen.Margin = new Padding(2, 2, 2, 2);
+            btnAufModulBringen.Margin = new Padding(2);
             btnAufModulBringen.Name = "btnAufModulBringen";
             btnAufModulBringen.Size = new Size(198, 24);
             btnAufModulBringen.TabIndex = 1;
@@ -262,7 +263,7 @@
             // textBox
             // 
             textBox.Location = new Point(11, 32);
-            textBox.Margin = new Padding(2, 2, 2, 2);
+            textBox.Margin = new Padding(2);
             textBox.Name = "textBox";
             textBox.Size = new Size(199, 27);
             textBox.TabIndex = 0;
@@ -275,7 +276,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1122, 222);
+            ClientSize = new Size(1182, 222);
             Controls.Add(grpText);
             Controls.Add(grpSpeichern);
             Controls.Add(grpColor);
