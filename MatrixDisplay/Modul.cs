@@ -48,6 +48,12 @@ namespace MatrixDisplay
         {
             return ledArray;
         }
+        public Led getLed(int x, int y)
+        {
+            int index_spalte = x ;
+            int index_zeile = y ;
+            return ledArray[index_zeile, index_spalte];
+        }
 
         public Led getLedByPixel(int x, int y)
         {
