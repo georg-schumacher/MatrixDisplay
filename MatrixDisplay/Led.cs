@@ -32,13 +32,11 @@
 
             int modulBreiteInPixel = spaltenAnzahl * ledPixelBreite;
             yPos = zeile * ledPixelHoehe;
-            xPos = spalte * ledPixelBreite + 
-                ( modulNr * modulBreiteInPixel);
+            xPos = spalte * ledPixelBreite;
 
             localIndex = zeile * spaltenAnzahl + spalte;
 
-            globalIndex = localIndex 
-                + modulNr * (zeilenAnzahl * spaltenAnzahl);
+            globalIndex = zeile * (spaltenAnzahl/8) + spalte;
 
         }
 
