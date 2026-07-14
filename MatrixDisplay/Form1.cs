@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.IO.Ports;
+using System.Text.Json;
 
 namespace MatrixDisplay
 {
@@ -67,6 +68,34 @@ namespace MatrixDisplay
                 modul.Scrollen();
             }
             matrixDisplay.Invalidate();
+        }
+
+        private void btnSpeichern_Click(object sender, EventArgs e)
+        {
+            
+            // arbeitet zuerst mit einem fixen dateinname
+            string pfad = @"U:\Documents\MatrixPersistierung.txt";
+            // string inhalt = File.ReadAllText(pfad);
+            string[] zeilen = File.ReadAllLines(pfad); // lesen
+            File.WriteAllLines(pfad, zeilen); // schreiben
+
+            Led[,] led_array = modul.getLedArray();
+            //string[] arr1d = led_array.Cast<string>().Select(c => c).ToArray();
+
+            JsonSerializerOptions options = new JsonSerializerOptions();
+            options.IncludeFields = true;
+            string jsonString = JsonSerializer.Serialize(led_array, options);
+                
+            // string Ausgabe = string.Join("", led_array);
+            
+            File.WriteAllText(pfad, jsonString);
+
+
+            // lesen:
+            
+            // Zeilenweise (praktisch für je-Led-eine-Zeile):
+              // schreiben
+            //Zum Auswählen der Datei helfen `SaveFileDialog` und `OpenFileDialog`.
         }
     }
 }
