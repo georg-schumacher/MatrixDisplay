@@ -4,47 +4,42 @@ namespace MatrixDisplay
 {
     public class Protokoll
     {
-        public static void SendeLedDatenAnStm32(Modul modul)
+        public static void SendeLedDatenAnStm32(MatrixDisplay display, string portName)
         {
-            Led[,] led_array = modul.getLedArray();
-            byte[] send_data = new byte[modul.GetSpalten() * modul.GetZeilen() * 4];
-            int send_counter = 0;
+            int bytesPerLed = 4;
+            byte[] send_data = new byte[display.GetAnzahlLeds() * bytesPerLed];
 
-            Random rnd = new Random(); // Todo: Remove this and take the real led color!
-
-            for (int row = 0; row < modul.GetZeilen(); row++)
+            foreach (Modul modul in display.GetModule())
             {
-                for (int col = 0; col < modul.GetSpalten(); col++)
+                for (int row = 0; row < modul.GetZeilen(); row++)
                 {
-                    Led l = led_array[row, col];
-                    if (l.IstAn())
+                    for (int col = 0; col < modul.GetSpalten(); col++)
                     {
-                        int shift_idx = l.getGlobalIndex() * 4;
-                        send_data[shift_idx] = 1;
-                        send_data[shift_idx + 1] = (byte)rnd.Next(0, 255); // Rot
-                        send_data[shift_idx + 2] = (byte)rnd.Next(0, 255); // Grün
-                        send_data[shift_idx + 3] = (byte)rnd.Next(0, 255); // Blau
-
-
+                        Led led = modul.getLedByZeileXSpalte(row, col);
+                        if (led.IstAn())
+                        {
+                            int shift_idx = led.getGlobalIndex() * bytesPerLed;
+                            send_data[shift_idx] = 1;
+                            send_data[shift_idx + 1] = led.GetFarbe().R; // Rot
+                            send_data[shift_idx + 2] = led.GetFarbe().G; // Grün
+                            send_data[shift_idx + 3] = led.GetFarbe().B; // Blau
+                        }
+                        else
+                        {
+                            int shift_idx = led.getGlobalIndex() * bytesPerLed;
+                            send_data[shift_idx] = 0; // LED ist aus
+                            send_data[shift_idx + 1] = 0;
+                            send_data[shift_idx + 2] = 0;
+                            send_data[shift_idx + 3] = 0;
+                        }
                     }
-                    else
-                    {
-                        int shift_idx = l.getGlobalIndex() * 4;
-                        send_data[shift_idx] = 0; // LED ist aus
-                        send_data[shift_idx + 1] = 0;
-                        send_data[shift_idx + 2] = 0;
-                        send_data[shift_idx + 3] = 0;
-                    }
-
                 }
             }
 
-
-            SerialPort _serialPort = new SerialPort("COM4", 9600, Parity.None, 8, StopBits.One);
-
-
             try
             {
+                // portName = "COM3"; // COM-Port anpassen
+                SerialPort _serialPort = new SerialPort(portName, 9600, Parity.None, 8, StopBits.One);
                 if (!(_serialPort.IsOpen))
                 {
                     _serialPort.Open();
@@ -56,7 +51,7 @@ namespace MatrixDisplay
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error opening/writing to serial port :: " + ex.Message, "Error!");
+                MessageBox.Show($"Error opening/writing to serial port ({portName}): {ex.Message}", "Error!");
             }
         }
     }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            matrixDisplay = new DoubleBufferedPanel();
+            matrixDisplayPanel = new DoubleBufferedPanel();
             btnSendeDaten = new Button();
             btnScroll = new Button();
             grpColor = new GroupBox();
@@ -49,30 +49,39 @@
             textBox = new TextBox();
             colorDialog = new ColorDialog();
             timer = new System.Windows.Forms.Timer(components);
+            grpReset = new GroupBox();
+            btnReset = new Button();
+            numAnzahlModule = new NumericUpDown();
+            label5 = new Label();
+            grpComPort = new GroupBox();
+            listBoxComPort = new ListBox();
             grpColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numBlau).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numGruen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numRot).BeginInit();
             grpSpeichern.SuspendLayout();
             grpText.SuspendLayout();
+            grpReset.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numAnzahlModule).BeginInit();
+            grpComPort.SuspendLayout();
             SuspendLayout();
             // 
-            // matrixDisplay
+            // matrixDisplayPanel
             // 
-            matrixDisplay.BackColor = Color.Black;
-            matrixDisplay.Location = new Point(14, 15);
-            matrixDisplay.Margin = new Padding(5, 6, 5, 6);
-            matrixDisplay.Name = "matrixDisplay";
-            matrixDisplay.Size = new Size(2000, 200);
-            matrixDisplay.TabIndex = 0;
-            matrixDisplay.Paint += matrixDisplay_Paint;
-            matrixDisplay.MouseDown += matrixDisplay_MouseDown;
+            matrixDisplayPanel.BackColor = Color.Black;
+            matrixDisplayPanel.Location = new Point(183, 16);
+            matrixDisplayPanel.Margin = new Padding(5, 6, 5, 6);
+            matrixDisplayPanel.Name = "matrixDisplayPanel";
+            matrixDisplayPanel.Size = new Size(1200, 200);
+            matrixDisplayPanel.TabIndex = 0;
+            matrixDisplayPanel.Paint += matrixDisplayPanel_Paint;
+            matrixDisplayPanel.MouseDown += matrixDisplay_MouseDown;
             // 
             // btnSendeDaten
             // 
             btnSendeDaten.BackColor = Color.LightCoral;
             btnSendeDaten.Font = new Font("Segoe UI Emoji", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSendeDaten.Location = new Point(14, 227);
+            btnSendeDaten.Location = new Point(183, 228);
             btnSendeDaten.Margin = new Padding(5, 6, 5, 6);
             btnSendeDaten.Name = "btnSendeDaten";
             btnSendeDaten.Size = new Size(279, 204);
@@ -84,13 +93,14 @@
             // btnScroll
             // 
             btnScroll.Font = new Font("Segoe UI Emoji", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnScroll.Location = new Point(303, 227);
+            btnScroll.Location = new Point(472, 228);
             btnScroll.Margin = new Padding(5, 6, 5, 6);
             btnScroll.Name = "btnScroll";
             btnScroll.Size = new Size(279, 204);
             btnScroll.TabIndex = 2;
             btnScroll.Text = "📜\nScrollen\n[Rotieren]\n(Software Emulation)";
             btnScroll.UseVisualStyleBackColor = true;
+            btnScroll.Click += btnScroll_Click;
             // 
             // grpColor
             // 
@@ -102,8 +112,10 @@
             grpColor.Controls.Add(numGruen);
             grpColor.Controls.Add(numRot);
             grpColor.Font = new Font("Segoe UI Emoji", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpColor.Location = new Point(634, 227);
+            grpColor.Location = new Point(774, 228);
+            grpColor.Margin = new Padding(3, 4, 3, 4);
             grpColor.Name = "grpColor";
+            grpColor.Padding = new Padding(3, 4, 3, 4);
             grpColor.Size = new Size(327, 204);
             grpColor.TabIndex = 3;
             grpColor.TabStop = false;
@@ -111,9 +123,10 @@
             // 
             // btnColorDialog
             // 
-            btnColorDialog.Location = new Point(249, 47);
+            btnColorDialog.Location = new Point(249, 48);
+            btnColorDialog.Margin = new Padding(3, 4, 3, 4);
             btnColorDialog.Name = "btnColorDialog";
-            btnColorDialog.Size = new Size(54, 136);
+            btnColorDialog.Size = new Size(53, 136);
             btnColorDialog.TabIndex = 7;
             btnColorDialog.Text = "🎨";
             btnColorDialog.UseVisualStyleBackColor = true;
@@ -123,7 +136,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.Blue;
-            label3.Location = new Point(33, 143);
+            label3.Location = new Point(33, 144);
             label3.Name = "label3";
             label3.Size = new Size(79, 36);
             label3.TabIndex = 6;
@@ -133,7 +146,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.Lime;
-            label2.Location = new Point(33, 95);
+            label2.Location = new Point(33, 96);
             label2.Name = "label2";
             label2.Size = new Size(89, 36);
             label2.TabIndex = 6;
@@ -143,7 +156,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.Red;
-            label1.Location = new Point(33, 47);
+            label1.Location = new Point(33, 48);
             label1.Name = "label1";
             label1.Size = new Size(65, 36);
             label1.TabIndex = 6;
@@ -152,10 +165,11 @@
             // numBlau
             // 
             numBlau.Increment = new decimal(new int[] { 10, 0, 0, 0 });
-            numBlau.Location = new Point(147, 141);
+            numBlau.Location = new Point(147, 140);
+            numBlau.Margin = new Padding(3, 4, 3, 4);
             numBlau.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numBlau.Name = "numBlau";
-            numBlau.Size = new Size(78, 42);
+            numBlau.Size = new Size(79, 42);
             numBlau.TabIndex = 0;
             numBlau.TextAlign = HorizontalAlignment.Right;
             numBlau.Value = new decimal(new int[] { 127, 0, 0, 0 });
@@ -163,21 +177,23 @@
             // numGruen
             // 
             numGruen.Increment = new decimal(new int[] { 10, 0, 0, 0 });
-            numGruen.Location = new Point(147, 93);
+            numGruen.Location = new Point(147, 92);
+            numGruen.Margin = new Padding(3, 4, 3, 4);
             numGruen.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numGruen.Name = "numGruen";
-            numGruen.Size = new Size(78, 42);
+            numGruen.Size = new Size(79, 42);
             numGruen.TabIndex = 0;
             numGruen.TextAlign = HorizontalAlignment.Right;
-            numGruen.Value = new decimal(new int[] { 127, 0, 0, 0 });
+            numGruen.Value = new decimal(new int[] { 222, 0, 0, 0 });
             // 
             // numRot
             // 
             numRot.Increment = new decimal(new int[] { 10, 0, 0, 0 });
-            numRot.Location = new Point(147, 45);
+            numRot.Location = new Point(147, 44);
+            numRot.Margin = new Padding(3, 4, 3, 4);
             numRot.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numRot.Name = "numRot";
-            numRot.Size = new Size(78, 42);
+            numRot.Size = new Size(79, 42);
             numRot.TabIndex = 0;
             numRot.TextAlign = HorizontalAlignment.Right;
             numRot.Value = new decimal(new int[] { 127, 0, 0, 0 });
@@ -188,9 +204,11 @@
             grpSpeichern.Controls.Add(btnSpeichern);
             grpSpeichern.Controls.Add(btnLaden);
             grpSpeichern.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpSpeichern.Location = new Point(1031, 227);
+            grpSpeichern.Location = new Point(1127, 228);
+            grpSpeichern.Margin = new Padding(3, 4, 3, 4);
             grpSpeichern.Name = "grpSpeichern";
-            grpSpeichern.Size = new Size(436, 204);
+            grpSpeichern.Padding = new Padding(3, 4, 3, 4);
+            grpSpeichern.Size = new Size(435, 204);
             grpSpeichern.TabIndex = 4;
             grpSpeichern.TabStop = false;
             grpSpeichern.Text = "Laden 💾 Speichern";
@@ -199,7 +217,7 @@
             // 
             labelDateiMitPfad.AutoSize = true;
             labelDateiMitPfad.Enabled = false;
-            labelDateiMitPfad.Location = new Point(13, 143);
+            labelDateiMitPfad.Location = new Point(14, 144);
             labelDateiMitPfad.Name = "labelDateiMitPfad";
             labelDateiMitPfad.Size = new Size(406, 38);
             labelDateiMitPfad.TabIndex = 1;
@@ -208,6 +226,7 @@
             // btnSpeichern
             // 
             btnSpeichern.Location = new Point(238, 60);
+            btnSpeichern.Margin = new Padding(3, 4, 3, 4);
             btnSpeichern.Name = "btnSpeichern";
             btnSpeichern.Size = new Size(154, 52);
             btnSpeichern.TabIndex = 0;
@@ -217,6 +236,7 @@
             // btnLaden
             // 
             btnLaden.Location = new Point(45, 60);
+            btnLaden.Margin = new Padding(3, 4, 3, 4);
             btnLaden.Name = "btnLaden";
             btnLaden.Size = new Size(154, 52);
             btnLaden.TabIndex = 0;
@@ -228,44 +248,114 @@
             grpText.Controls.Add(btnAufModulBringen);
             grpText.Controls.Add(textBox);
             grpText.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpText.Location = new Point(1631, 227);
+            grpText.Location = new Point(1599, 228);
+            grpText.Margin = new Padding(3, 4, 3, 4);
             grpText.Name = "grpText";
-            grpText.Size = new Size(383, 204);
+            grpText.Padding = new Padding(3, 4, 3, 4);
+            grpText.Size = new Size(382, 204);
             grpText.TabIndex = 5;
             grpText.TabStop = false;
             grpText.Text = "Text-Eingabe";
             // 
             // btnAufModulBringen
             // 
-            btnAufModulBringen.Location = new Point(19, 131);
+            btnAufModulBringen.Location = new Point(19, 132);
+            btnAufModulBringen.Margin = new Padding(3, 4, 3, 4);
             btnAufModulBringen.Name = "btnAufModulBringen";
             btnAufModulBringen.Size = new Size(339, 48);
             btnAufModulBringen.TabIndex = 1;
             btnAufModulBringen.Text = "auf Modul bringen";
             btnAufModulBringen.UseVisualStyleBackColor = true;
+            btnAufModulBringen.Click += btnAufModulBringen_Click;
             // 
             // textBox
             // 
-            textBox.Location = new Point(19, 65);
+            textBox.Location = new Point(19, 64);
+            textBox.Margin = new Padding(3, 4, 3, 4);
             textBox.Name = "textBox";
-            textBox.Size = new Size(339, 42);
+            textBox.Size = new Size(338, 42);
             textBox.TabIndex = 0;
             // 
             // timer
             // 
             timer.Tick += timer_Tick;
             // 
+            // grpReset
+            // 
+            grpReset.Controls.Add(btnReset);
+            grpReset.Controls.Add(numAnzahlModule);
+            grpReset.Controls.Add(label5);
+            grpReset.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            grpReset.Location = new Point(2010, 228);
+            grpReset.Name = "grpReset";
+            grpReset.Size = new Size(343, 204);
+            grpReset.TabIndex = 6;
+            grpReset.TabStop = false;
+            grpReset.Text = "Reset";
+            // 
+            // btnReset
+            // 
+            btnReset.Location = new Point(27, 130);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(289, 48);
+            btnReset.TabIndex = 4;
+            btnReset.Text = "Übernehmen";
+            btnReset.UseVisualStyleBackColor = true;
+            btnReset.Click += btnReset_Click;
+            // 
+            // numAnzahlModule
+            // 
+            numAnzahlModule.BorderStyle = BorderStyle.FixedSingle;
+            numAnzahlModule.Location = new Point(235, 61);
+            numAnzahlModule.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
+            numAnzahlModule.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numAnzahlModule.Name = "numAnzahlModule";
+            numAnzahlModule.Size = new Size(81, 42);
+            numAnzahlModule.TabIndex = 3;
+            numAnzahlModule.TextAlign = HorizontalAlignment.Center;
+            numAnzahlModule.Value = new decimal(new int[] { 7, 0, 0, 0 });
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(27, 65);
+            label5.Name = "label5";
+            label5.Size = new Size(202, 37);
+            label5.TabIndex = 2;
+            label5.Text = "Anzahl Module:";
+            // 
+            // grpComPort
+            // 
+            grpComPort.Controls.Add(listBoxComPort);
+            grpComPort.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            grpComPort.Location = new Point(16, 159);
+            grpComPort.Name = "grpComPort";
+            grpComPort.Size = new Size(159, 273);
+            grpComPort.TabIndex = 7;
+            grpComPort.TabStop = false;
+            grpComPort.Text = "ComPort";
+            // 
+            // listBoxComPort
+            // 
+            listBoxComPort.FormattingEnabled = true;
+            listBoxComPort.Location = new Point(6, 41);
+            listBoxComPort.Name = "listBoxComPort";
+            listBoxComPort.Size = new Size(146, 220);
+            listBoxComPort.TabIndex = 0;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2029, 443);
+            ClientSize = new Size(2377, 452);
+            Controls.Add(grpComPort);
+            Controls.Add(grpReset);
             Controls.Add(grpText);
             Controls.Add(grpSpeichern);
             Controls.Add(grpColor);
             Controls.Add(btnScroll);
             Controls.Add(btnSendeDaten);
-            Controls.Add(matrixDisplay);
+            Controls.Add(matrixDisplayPanel);
             Margin = new Padding(5, 6, 5, 6);
             Name = "Form1";
             Text = "Form1";
@@ -278,12 +368,16 @@
             grpSpeichern.PerformLayout();
             grpText.ResumeLayout(false);
             grpText.PerformLayout();
+            grpReset.ResumeLayout(false);
+            grpReset.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numAnzahlModule).EndInit();
+            grpComPort.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DoubleBufferedPanel matrixDisplay;
+        private DoubleBufferedPanel matrixDisplayPanel;
         private Button btnSendeDaten;
         private Button btnScroll;
         private GroupBox grpColor;
@@ -303,5 +397,11 @@
         private TextBox textBox;
         private Button btnColorDialog;
         private System.Windows.Forms.Timer timer;
+        private GroupBox grpReset;
+        private Button btnReset;
+        private NumericUpDown numAnzahlModule;
+        private Label label5;
+        private GroupBox grpComPort;
+        private ListBox listBoxComPort;
     }
 }
