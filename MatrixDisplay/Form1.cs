@@ -7,7 +7,7 @@ namespace MatrixDisplay
     {
         Modul modul;
 
-        bool darfScrollen = true;
+        bool darfScrollen = false;
 
         public Form1()
         {
@@ -67,6 +67,11 @@ namespace MatrixDisplay
                 modul.Scrollen();
             }
             matrixDisplay.Invalidate();
+        }
+
+        private void btnScroll_Click(object sender, EventArgs e)
+        {
+            darfScrollen = !darfScrollen;
         }
     }
 }
