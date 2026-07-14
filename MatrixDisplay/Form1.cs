@@ -5,8 +5,7 @@ namespace MatrixDisplay
 {
     public partial class Form1 : Form
     {
-        Modul modul;
-        public Buchstaben buch = new Buchstaben();
+        MatrixDisplay matrixDisplay;
 
         bool darfScrollen = false;
 
@@ -16,30 +15,33 @@ namespace MatrixDisplay
 
             btnColorDialog.Enabled = true;
 
-            int breite = matrixDisplay.Width;
-            int hoehe = matrixDisplay.Height;
-            // ........................ 10 = Anzahl der 8x8 HW-Led-Module
-            modul = new Modul(0, 8, 8 * 10, breite, hoehe);
+            initMatrixDisplayDatenModel(7);
 
             timer.Interval = 100;
             timer.Start();
         }
 
-        // initiales Zeichnen -und- immer bei Invalidate() 
-        private void matrixDisplay_Paint(object sender, PaintEventArgs e)
+        public void initMatrixDisplayDatenModel(int anzahlModule)
         {
-            modul.ZeichneAlleLeds(e.Graphics);
+            matrixDisplayPanel.Width = anzahlModule * matrixDisplayPanel.Height;
+            matrixDisplay = new MatrixDisplay(anzahlModule, 8, 8, matrixDisplayPanel.Width, matrixDisplayPanel.Height);
+        }
+
+        // initiales Zeichnen -und- immer bei Invalidate() 
+        private void matrixDisplayPanel_Paint(object sender, PaintEventArgs e)
+        {
+            matrixDisplay.ZeichneMatrixDisplay(e.Graphics);
         }
 
         // Funktion welche die SW-Led  daten an die HW-Seite sendet.
         private void btnSendeDaten_Click(object sender, EventArgs e)
         {
-            Protokoll.SendeLedDatenAnStm32(modul);
+            Protokoll.SendeLedDatenAnStm32(matrixDisplay);
         }
 
         private void matrixDisplay_MouseDown(object sender, MouseEventArgs e)
         {
-            Led led = modul.getLedByPixel(e.X, e.Y);
+            Led led = matrixDisplay.GetLedByPixel(e.X, e.Y);
 
             int r = (int)numRot.Value;
             int g = (int)numGruen.Value;
@@ -49,7 +51,7 @@ namespace MatrixDisplay
             led.SetzeFarbe(r, g, b);
 
             led.Umschalten();
-            matrixDisplay.Invalidate();
+            matrixDisplayPanel.Invalidate();
         }
 
         //neu (haben google verwendet)
@@ -83,52 +85,24 @@ namespace MatrixDisplay
         {
             if (darfScrollen)
             {
-                modul.Scrollen();
+                matrixDisplay.Scrollen();
             }
-            matrixDisplay.Invalidate();
+            matrixDisplayPanel.Invalidate();
         }
 
         private void btnAufModulBringen_Click(object sender, EventArgs e)
         {
-            
+            byte rot = (byte)numRot.Value;
+            byte gruen = (byte)numGruen.Value;
+            byte blau = (byte)numBlau.Value;
             string eingabe = textBox.Text;
-            for(int i = 0; i < eingabe.Length; i++)
-            {
-                if (eingabe[i] == 'a' || eingabe[i] == 'A')
-                {
-                    for(int s = 0;s < buch.buchstabe_a.GetLength(0); s++)
-                    {
-                        for(int z = 0;z < buch.buchstabe_a.GetLength(1); z++)
-                        {
-                            if (buch.buchstabe_a[s,z] == true)
-                            {
-                                Led led = modul.getLed(z,s);
-                                led.Umschalten();
-                                matrixDisplay.Invalidate();
-                            }
-                        }
-                    }
-                }
-                else if (eingabe[i] == 'b' || eingabe[i] == 'B')
-                {
-                    for (int s = 0; s < buch.buchstabe_b.GetLength(0); s++)
-                    {
-                        for (int z = 0; z < buch.buchstabe_b.GetLength(1); z++)
-                        {
+            TextAufsModulBringerUeberarbeitet.BringeTextAufsModul(matrixDisplay, eingabe, rot, gruen, blau);
+            matrixDisplayPanel.Invalidate();
+        }
 
-                            if (buch.buchstabe_b[s, z] == true)
-                            {
-                                Led led = modul.getLed(z, s);
-                                led.Umschalten();
-                                matrixDisplay.Invalidate();
-                            }
-                        }
-                    }
-                }
-            }
-            
-
-
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            initMatrixDisplayDatenModel((int)numAnzahlModule.Value);
         }
     }
 }

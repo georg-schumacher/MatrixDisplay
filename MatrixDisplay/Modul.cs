@@ -9,11 +9,10 @@ namespace MatrixDisplay
         private int anzahlSpalten;
         private int breite;
         private int hoehe;
+        private int ledBreite;
+        private int ledHoehe;
 
-        public Modul(
-            int modulNr,
-            int zeilen, int spalten,
-            int breite, int hoehe)
+        public Modul(int modulNr, int zeilen, int spalten, int breite, int hoehe)
         {
             this.breite = breite;
             this.hoehe = hoehe;
@@ -22,18 +21,14 @@ namespace MatrixDisplay
             this.anzahlSpalten = spalten;
             ledArray = new Led[zeilen, spalten];
 
-            int ledBreite = breite / anzahlSpalten;
-            int ledHoehe = hoehe / anzahlZeilen;
+            ledBreite = breite / anzahlSpalten;
+            ledHoehe = hoehe / anzahlZeilen;
 
             for (int z = 0; z < anzahlZeilen; z++)
             {
                 for (int s = 0; s < anzahlSpalten; s++)
                 {
-                    Led neueLed;
-                    neueLed = new Led(z, s,
-                        ledBreite, ledHoehe, this);
-                    ledArray[z, s] = neueLed;
-
+                    ledArray[z, s] = new Led(z, s, ledBreite, ledHoehe, this);
                 }
             }
 
@@ -48,17 +43,20 @@ namespace MatrixDisplay
         {
             return ledArray;
         }
-        public Led getLed(int x, int y)
+        public Led getLedByZeileXSpalte(int zeile, int spalte)
         {
-            int index_spalte = x ;
-            int index_zeile = y ;
-            return ledArray[index_zeile, index_spalte];
+            return ledArray[zeile, spalte];
         }
 
         public Led getLedByPixel(int x, int y)
         {
-            int index_spalte = x / (breite / anzahlSpalten);
-            int index_zeile = y / (hoehe / anzahlZeilen);
+
+            int ledBreite = breite / anzahlSpalten;
+            int ledHoehe = hoehe / anzahlZeilen;
+
+            int index_spalte = x / ledBreite;
+            int index_zeile = y / ledHoehe;
+
             return ledArray[index_zeile, index_spalte];
         }
 
@@ -82,7 +80,7 @@ namespace MatrixDisplay
             return anzahlZeilen;
         }
 
-        public void ZeichneAlleLeds(Graphics g)
+        public void ZeichneModul(Graphics g)
         {
             for (int z = 0; z < anzahlZeilen; z++)
             {
@@ -93,41 +91,40 @@ namespace MatrixDisplay
             }
         }
 
-        internal void Scrollen()
+        // Kopie der ersten Spalte (Zustand + Farbe) als eigenständige Leds,
+        // damit die Werte das Schieben überleben
+        public Led[] GetErsteSpalte()
         {
-            // Modul.Scrollen
+            Led[] ersteSpalte = new Led[anzahlZeilen];
 
-            // Phase 1
-            // TODO: Erste Spalte wegsichern als Led-Array !!
-
-            Led[] firstCol = new Led[anzahlZeilen];
-            for(int i = 0; i < anzahlZeilen; i++)
+            for (int z = 0; z < anzahlZeilen; z++)
             {
-                firstCol[i] = ledArray[i, 0];
-                firstCol[i].UebernehmeWerteVon(ledArray[i, 0]);
+                ersteSpalte[z] = new Led(z, 0, ledBreite, ledHoehe, this);
+                ersteSpalte[z].UebernehmeWerteVon(ledArray[z, 0]);
             }
+            return ersteSpalte;
+        }
 
-
-            // Phase 2
-            // jede Led: eins nach-links schieben (Erste Spalte geht verloren)
-            for (int s = 0; s < anzahlSpalten - 1; s++)
+        public void SchiebeLinks()
+        {
+            for (int z = 0; z < anzahlZeilen; z++)
             {
-                for (int z = 0; z < anzahlZeilen; z++)
+                for (int s = 0; s < anzahlSpalten - 1; s++)
                 {
-                    Led led_links = ledArray[z, s];
-                    Led led_rechts = ledArray[z, s + 1];
-                    led_links.UebernehmeWerteVon(led_rechts);
+                    ledArray[z, s].UebernehmeWerteVon(ledArray[z, s + 1]);
                 }
             }
-
-            // Phase 3
-            // TODO: 
-
-            for(int z = 0; z < anzahlZeilen; z++)
-            {
-                ledArray[z, anzahlSpalten - 1].UebernehmeWerteVon(firstCol[z]);
-            }
-
         }
+
+        public void SetzeLetzteSpalteMit(Led[] bufferSpalte)
+        {
+            int index_GanzRechts  = anzahlSpalten - 1;
+            for (int z = 0; z < anzahlZeilen; z++)
+            {
+                ledArray[z, index_GanzRechts].UebernehmeWerteVon(bufferSpalte[z]);
+            }
+        }
+
+
     }
 }

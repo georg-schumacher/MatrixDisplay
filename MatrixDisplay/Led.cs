@@ -19,7 +19,7 @@
             int breite, int hoehe,
             Modul modul)
         {
-            farbe = Color.FromArgb(0, 192, 0);
+            farbe = Color.FromArgb(0, 222, 0);
             parentModul = modul;
             ledPixelBreite = breite;
             ledPixelHoehe = hoehe;
@@ -34,11 +34,13 @@
 
             int modulBreiteInPixel = spaltenAnzahl * ledPixelBreite;
             yPos = zeile * ledPixelHoehe;
-            xPos = spalte * ledPixelBreite;
+            xPos = spalte * ledPixelBreite
+                + (modulNr * modulBreiteInPixel);
 
             localIndex = zeile * spaltenAnzahl + spalte;
 
-            globalIndex = zeile * (spaltenAnzahl/8) + spalte;
+            globalIndex = localIndex
+                + modulNr * (zeilenAnzahl * spaltenAnzahl);
 
         }
 
@@ -58,7 +60,12 @@
             farbe = Color.FromArgb(r, g, b);
         }
 
-        
+
+        public Color GetFarbe()
+        {
+            return farbe;
+        }
+
 
         public void UebernehmeWerteVon(Led other)
         {
