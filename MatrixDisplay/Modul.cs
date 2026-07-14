@@ -100,6 +100,14 @@ namespace MatrixDisplay
             // Phase 1
             // TODO: Erste Spalte wegsichern als Led-Array !!
 
+            Led[] firstCol = new Led[anzahlZeilen];
+            for(int i = 0; i < anzahlZeilen; i++)
+            {
+                firstCol[i] = ledArray[i, 0];
+                firstCol[i].UebernehmeWerteVon(ledArray[i, 0]);
+            }
+
+
             // Phase 2
             // jede Led: eins nach-links schieben (Erste Spalte geht verloren)
             for (int s = 0; s < anzahlSpalten - 1; s++)
@@ -115,7 +123,10 @@ namespace MatrixDisplay
             // Phase 3
             // TODO: 
 
-
+            for(int z = 0; z < anzahlZeilen; z++)
+            {
+                ledArray[z, anzahlSpalten - 1].UebernehmeWerteVon(firstCol[z]);
+            }
 
         }
     }

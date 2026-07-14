@@ -62,7 +62,7 @@
             matrixDisplay.BackColor = Color.Black;
             matrixDisplay.Location = new Point(8, 8);
             matrixDisplay.Name = "matrixDisplay";
-            matrixDisplay.Size = new Size(1167, 100);
+            matrixDisplay.Size = new Size(800, 100);
             matrixDisplay.TabIndex = 0;
             matrixDisplay.Paint += matrixDisplay_Paint;
             matrixDisplay.MouseDown += matrixDisplay_MouseDown;
@@ -88,6 +88,7 @@
             btnScroll.TabIndex = 2;
             btnScroll.Text = "📜\nScrollen\n[Rotieren]\n(Software Emulation)";
             btnScroll.UseVisualStyleBackColor = true;
+            btnScroll.Click += btnScroll_Click;
             // 
             // grpColor
             // 
@@ -247,6 +248,7 @@
             grpText.TabIndex = 5;
             grpText.TabStop = false;
             grpText.Text = "Text-Eingabe";
+            grpText.Enter += grpText_Enter;
             // 
             // btnAufModulBringen
             // 
