@@ -12,11 +12,14 @@ namespace MatrixDisplay
         public Form1()
         {
             InitializeComponent();
-
-            btnColorDialog.Enabled = true;
-
+            // initialisiere das MatrixDisplay-Datenmodell mit 7 Modulen
             initMatrixDisplayDatenModel(7);
 
+            // COM-Port-Liste füllen
+            listBoxComPort.Items.AddRange(SerialPort.GetPortNames());
+            if (listBoxComPort.Items.Count > 0) { listBoxComPort.SelectedIndex = 0; }
+
+            // Timer initialisieren
             timer.Interval = 100;
             timer.Start();
         }
@@ -36,7 +39,8 @@ namespace MatrixDisplay
         // Funktion welche die SW-Led  daten an die HW-Seite sendet.
         private void btnSendeDaten_Click(object sender, EventArgs e)
         {
-            Protokoll.SendeLedDatenAnStm32(matrixDisplay);
+            string portName = listBoxComPort.Text;
+            Protokoll.SendeLedDatenAnStm32(matrixDisplay, portName);
         }
 
         private void matrixDisplay_MouseDown(object sender, MouseEventArgs e)

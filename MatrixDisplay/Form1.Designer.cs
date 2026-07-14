@@ -53,9 +53,8 @@
             btnReset = new Button();
             numAnzahlModule = new NumericUpDown();
             label5 = new Label();
-            comboBoxComPort = new ComboBox();
             grpComPort = new GroupBox();
-            button1 = new Button();
+            listBoxComPort = new ListBox();
             grpColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numBlau).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numGruen).BeginInit();
@@ -70,7 +69,7 @@
             // matrixDisplayPanel
             // 
             matrixDisplayPanel.BackColor = Color.Black;
-            matrixDisplayPanel.Location = new Point(14, 16);
+            matrixDisplayPanel.Location = new Point(183, 16);
             matrixDisplayPanel.Margin = new Padding(5, 6, 5, 6);
             matrixDisplayPanel.Name = "matrixDisplayPanel";
             matrixDisplayPanel.Size = new Size(1200, 200);
@@ -82,7 +81,7 @@
             // 
             btnSendeDaten.BackColor = Color.LightCoral;
             btnSendeDaten.Font = new Font("Segoe UI Emoji", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSendeDaten.Location = new Point(14, 228);
+            btnSendeDaten.Location = new Point(183, 228);
             btnSendeDaten.Margin = new Padding(5, 6, 5, 6);
             btnSendeDaten.Name = "btnSendeDaten";
             btnSendeDaten.Size = new Size(279, 204);
@@ -94,7 +93,7 @@
             // btnScroll
             // 
             btnScroll.Font = new Font("Segoe UI Emoji", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnScroll.Location = new Point(303, 228);
+            btnScroll.Location = new Point(472, 228);
             btnScroll.Margin = new Padding(5, 6, 5, 6);
             btnScroll.Name = "btnScroll";
             btnScroll.Size = new Size(279, 204);
@@ -113,7 +112,7 @@
             grpColor.Controls.Add(numGruen);
             grpColor.Controls.Add(numRot);
             grpColor.Font = new Font("Segoe UI Emoji", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpColor.Location = new Point(605, 228);
+            grpColor.Location = new Point(774, 228);
             grpColor.Margin = new Padding(3, 4, 3, 4);
             grpColor.Name = "grpColor";
             grpColor.Padding = new Padding(3, 4, 3, 4);
@@ -205,7 +204,7 @@
             grpSpeichern.Controls.Add(btnSpeichern);
             grpSpeichern.Controls.Add(btnLaden);
             grpSpeichern.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpSpeichern.Location = new Point(958, 228);
+            grpSpeichern.Location = new Point(1127, 228);
             grpSpeichern.Margin = new Padding(3, 4, 3, 4);
             grpSpeichern.Name = "grpSpeichern";
             grpSpeichern.Padding = new Padding(3, 4, 3, 4);
@@ -249,7 +248,7 @@
             grpText.Controls.Add(btnAufModulBringen);
             grpText.Controls.Add(textBox);
             grpText.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpText.Location = new Point(1430, 228);
+            grpText.Location = new Point(1599, 228);
             grpText.Margin = new Padding(3, 4, 3, 4);
             grpText.Name = "grpText";
             grpText.Padding = new Padding(3, 4, 3, 4);
@@ -287,7 +286,7 @@
             grpReset.Controls.Add(numAnzahlModule);
             grpReset.Controls.Add(label5);
             grpReset.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpReset.Location = new Point(1841, 228);
+            grpReset.Location = new Point(2010, 228);
             grpReset.Name = "grpReset";
             grpReset.Size = new Size(343, 204);
             grpReset.TabIndex = 6;
@@ -325,41 +324,30 @@
             label5.TabIndex = 2;
             label5.Text = "Anzahl Module:";
             // 
-            // comboBoxComPort
-            // 
-            comboBoxComPort.FormattingEnabled = true;
-            comboBoxComPort.Location = new Point(24, 57);
-            comboBoxComPort.Name = "comboBoxComPort";
-            comboBoxComPort.Size = new Size(204, 44);
-            comboBoxComPort.TabIndex = 0;
-            // 
             // grpComPort
             // 
-            grpComPort.Controls.Add(button1);
-            grpComPort.Controls.Add(comboBoxComPort);
+            grpComPort.Controls.Add(listBoxComPort);
             grpComPort.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpComPort.Location = new Point(2214, 228);
+            grpComPort.Location = new Point(16, 159);
             grpComPort.Name = "grpComPort";
-            grpComPort.Size = new Size(266, 204);
+            grpComPort.Size = new Size(159, 273);
             grpComPort.TabIndex = 7;
             grpComPort.TabStop = false;
             grpComPort.Text = "ComPort";
             // 
-            // button1
+            // listBoxComPort
             // 
-            button1.Location = new Point(24, 129);
-            button1.Name = "button1";
-            button1.Size = new Size(204, 48);
-            button1.TabIndex = 4;
-            button1.Text = "Übernehmen";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += btnReset_Click;
+            listBoxComPort.FormattingEnabled = true;
+            listBoxComPort.Location = new Point(6, 41);
+            listBoxComPort.Name = "listBoxComPort";
+            listBoxComPort.Size = new Size(146, 220);
+            listBoxComPort.TabIndex = 0;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2827, 450);
+            ClientSize = new Size(2377, 452);
             Controls.Add(grpComPort);
             Controls.Add(grpReset);
             Controls.Add(grpText);
@@ -413,8 +401,7 @@
         private Button btnReset;
         private NumericUpDown numAnzahlModule;
         private Label label5;
-        private ComboBox comboBoxComPort;
         private GroupBox grpComPort;
-        private Button button1;
+        private ListBox listBoxComPort;
     }
 }

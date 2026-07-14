@@ -4,9 +4,8 @@ namespace MatrixDisplay
 {
     public class Protokoll
     {
-        public static void SendeLedDatenAnStm32(MatrixDisplay display)
+        public static void SendeLedDatenAnStm32(MatrixDisplay display, string portName)
         {
-
             int bytesPerLed = 4;
             byte[] send_data = new byte[display.GetAnzahlLeds() * bytesPerLed];
 
@@ -37,12 +36,10 @@ namespace MatrixDisplay
                 }
             }
 
-
-            SerialPort _serialPort = new SerialPort("COM4", 9600, Parity.None, 8, StopBits.One);
-
-
             try
             {
+                // portName = "COM3"; // COM-Port anpassen
+                SerialPort _serialPort = new SerialPort(portName, 9600, Parity.None, 8, StopBits.One);
                 if (!(_serialPort.IsOpen))
                 {
                     _serialPort.Open();
@@ -54,7 +51,7 @@ namespace MatrixDisplay
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error opening/writing to serial port :: " + ex.Message, "Error!");
+                MessageBox.Show($"Error opening/writing to serial port ({portName}): {ex.Message}", "Error!");
             }
         }
     }
