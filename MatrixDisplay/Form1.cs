@@ -21,9 +21,6 @@ namespace MatrixDisplay
             // ........................ 10 = Anzahl der 8x8 HW-Led-Module
             modul = new Modul(0, 8, 8 * 10, breite, hoehe);
 
-            // Optional: Scroll-Button zum Ein/Aus
-            btnScroll.Click += btnScroll_Click;
-
             timer.Interval = 100;
             timer.Start();
         }

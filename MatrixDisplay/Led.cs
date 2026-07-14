@@ -19,6 +19,7 @@
             int breite, int hoehe,
             Modul modul)
         {
+            farbe = Color.FromArgb(0, 192, 0);
             parentModul = modul;
             ledPixelBreite = breite;
             ledPixelHoehe = hoehe;
