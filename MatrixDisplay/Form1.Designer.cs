@@ -60,10 +60,9 @@
             // matrixDisplay
             // 
             matrixDisplay.BackColor = Color.Black;
-            matrixDisplay.Location = new Point(14, 15);
-            matrixDisplay.Margin = new Padding(5, 6, 5, 6);
+            matrixDisplay.Location = new Point(8, 8);
             matrixDisplay.Name = "matrixDisplay";
-            matrixDisplay.Size = new Size(2000, 200);
+            matrixDisplay.Size = new Size(1167, 100);
             matrixDisplay.TabIndex = 0;
             matrixDisplay.Paint += matrixDisplay_Paint;
             matrixDisplay.MouseDown += matrixDisplay_MouseDown;
@@ -72,10 +71,9 @@
             // 
             btnSendeDaten.BackColor = Color.LightCoral;
             btnSendeDaten.Font = new Font("Segoe UI Emoji", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSendeDaten.Location = new Point(14, 227);
-            btnSendeDaten.Margin = new Padding(5, 6, 5, 6);
+            btnSendeDaten.Location = new Point(8, 114);
             btnSendeDaten.Name = "btnSendeDaten";
-            btnSendeDaten.Size = new Size(279, 204);
+            btnSendeDaten.Size = new Size(163, 102);
             btnSendeDaten.TabIndex = 1;
             btnSendeDaten.Text = "📯\nSende Daten\nan STM32\n(Hardware)";
             btnSendeDaten.UseVisualStyleBackColor = false;
@@ -84,10 +82,9 @@
             // btnScroll
             // 
             btnScroll.Font = new Font("Segoe UI Emoji", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnScroll.Location = new Point(303, 227);
-            btnScroll.Margin = new Padding(5, 6, 5, 6);
+            btnScroll.Location = new Point(177, 114);
             btnScroll.Name = "btnScroll";
-            btnScroll.Size = new Size(279, 204);
+            btnScroll.Size = new Size(163, 102);
             btnScroll.TabIndex = 2;
             btnScroll.Text = "📜\nScrollen\n[Rotieren]\n(Software Emulation)";
             btnScroll.UseVisualStyleBackColor = true;
@@ -102,18 +99,21 @@
             grpColor.Controls.Add(numGruen);
             grpColor.Controls.Add(numRot);
             grpColor.Font = new Font("Segoe UI Emoji", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpColor.Location = new Point(634, 227);
+            grpColor.Location = new Point(370, 114);
+            grpColor.Margin = new Padding(2, 2, 2, 2);
             grpColor.Name = "grpColor";
-            grpColor.Size = new Size(327, 204);
+            grpColor.Padding = new Padding(2, 2, 2, 2);
+            grpColor.Size = new Size(191, 102);
             grpColor.TabIndex = 3;
             grpColor.TabStop = false;
             grpColor.Text = "Farbe Vorgeben";
             // 
             // btnColorDialog
             // 
-            btnColorDialog.Location = new Point(249, 47);
+            btnColorDialog.Location = new Point(145, 24);
+            btnColorDialog.Margin = new Padding(2, 2, 2, 2);
             btnColorDialog.Name = "btnColorDialog";
-            btnColorDialog.Size = new Size(54, 136);
+            btnColorDialog.Size = new Size(31, 68);
             btnColorDialog.TabIndex = 7;
             btnColorDialog.Text = "🎨";
             btnColorDialog.UseVisualStyleBackColor = true;
@@ -123,9 +123,10 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.Blue;
-            label3.Location = new Point(33, 143);
+            label3.Location = new Point(19, 72);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(79, 36);
+            label3.Size = new Size(45, 20);
             label3.TabIndex = 6;
             label3.Text = "BLAU";
             // 
@@ -133,9 +134,10 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.Lime;
-            label2.Location = new Point(33, 95);
+            label2.Location = new Point(19, 48);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(89, 36);
+            label2.Size = new Size(49, 20);
             label2.TabIndex = 6;
             label2.Text = "GRÜN";
             // 
@@ -143,19 +145,21 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.Red;
-            label1.Location = new Point(33, 47);
+            label1.Location = new Point(19, 24);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(65, 36);
+            label1.Size = new Size(37, 20);
             label1.TabIndex = 6;
             label1.Text = "ROT";
             // 
             // numBlau
             // 
             numBlau.Increment = new decimal(new int[] { 10, 0, 0, 0 });
-            numBlau.Location = new Point(147, 141);
+            numBlau.Location = new Point(86, 70);
+            numBlau.Margin = new Padding(2, 2, 2, 2);
             numBlau.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numBlau.Name = "numBlau";
-            numBlau.Size = new Size(78, 42);
+            numBlau.Size = new Size(46, 27);
             numBlau.TabIndex = 0;
             numBlau.TextAlign = HorizontalAlignment.Right;
             numBlau.Value = new decimal(new int[] { 127, 0, 0, 0 });
@@ -163,10 +167,11 @@
             // numGruen
             // 
             numGruen.Increment = new decimal(new int[] { 10, 0, 0, 0 });
-            numGruen.Location = new Point(147, 93);
+            numGruen.Location = new Point(86, 46);
+            numGruen.Margin = new Padding(2, 2, 2, 2);
             numGruen.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numGruen.Name = "numGruen";
-            numGruen.Size = new Size(78, 42);
+            numGruen.Size = new Size(46, 27);
             numGruen.TabIndex = 0;
             numGruen.TextAlign = HorizontalAlignment.Right;
             numGruen.Value = new decimal(new int[] { 127, 0, 0, 0 });
@@ -174,10 +179,11 @@
             // numRot
             // 
             numRot.Increment = new decimal(new int[] { 10, 0, 0, 0 });
-            numRot.Location = new Point(147, 45);
+            numRot.Location = new Point(86, 22);
+            numRot.Margin = new Padding(2, 2, 2, 2);
             numRot.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             numRot.Name = "numRot";
-            numRot.Size = new Size(78, 42);
+            numRot.Size = new Size(46, 27);
             numRot.TabIndex = 0;
             numRot.TextAlign = HorizontalAlignment.Right;
             numRot.Value = new decimal(new int[] { 127, 0, 0, 0 });
@@ -188,9 +194,11 @@
             grpSpeichern.Controls.Add(btnSpeichern);
             grpSpeichern.Controls.Add(btnLaden);
             grpSpeichern.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpSpeichern.Location = new Point(1031, 227);
+            grpSpeichern.Location = new Point(601, 114);
+            grpSpeichern.Margin = new Padding(2, 2, 2, 2);
             grpSpeichern.Name = "grpSpeichern";
-            grpSpeichern.Size = new Size(436, 204);
+            grpSpeichern.Padding = new Padding(2, 2, 2, 2);
+            grpSpeichern.Size = new Size(254, 102);
             grpSpeichern.TabIndex = 4;
             grpSpeichern.TabStop = false;
             grpSpeichern.Text = "Laden 💾 Speichern";
@@ -199,26 +207,29 @@
             // 
             labelDateiMitPfad.AutoSize = true;
             labelDateiMitPfad.Enabled = false;
-            labelDateiMitPfad.Location = new Point(13, 143);
+            labelDateiMitPfad.Location = new Point(8, 72);
+            labelDateiMitPfad.Margin = new Padding(2, 0, 2, 0);
             labelDateiMitPfad.Name = "labelDateiMitPfad";
-            labelDateiMitPfad.Size = new Size(406, 38);
+            labelDateiMitPfad.Size = new Size(227, 21);
             labelDateiMitPfad.TabIndex = 1;
             labelDateiMitPfad.Text = "U:\\Dokumente\\Persistierung.txt";
             // 
             // btnSpeichern
             // 
-            btnSpeichern.Location = new Point(238, 60);
+            btnSpeichern.Location = new Point(139, 30);
+            btnSpeichern.Margin = new Padding(2, 2, 2, 2);
             btnSpeichern.Name = "btnSpeichern";
-            btnSpeichern.Size = new Size(154, 52);
+            btnSpeichern.Size = new Size(90, 26);
             btnSpeichern.TabIndex = 0;
             btnSpeichern.Text = "Speichern";
             btnSpeichern.UseVisualStyleBackColor = true;
             // 
             // btnLaden
             // 
-            btnLaden.Location = new Point(45, 60);
+            btnLaden.Location = new Point(26, 30);
+            btnLaden.Margin = new Padding(2, 2, 2, 2);
             btnLaden.Name = "btnLaden";
-            btnLaden.Size = new Size(154, 52);
+            btnLaden.Size = new Size(90, 26);
             btnLaden.TabIndex = 0;
             btnLaden.Text = "Laden";
             btnLaden.UseVisualStyleBackColor = true;
@@ -228,27 +239,32 @@
             grpText.Controls.Add(btnAufModulBringen);
             grpText.Controls.Add(textBox);
             grpText.Font = new Font("Segoe UI", 11.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpText.Location = new Point(1631, 227);
+            grpText.Location = new Point(951, 114);
+            grpText.Margin = new Padding(2, 2, 2, 2);
             grpText.Name = "grpText";
-            grpText.Size = new Size(383, 204);
+            grpText.Padding = new Padding(2, 2, 2, 2);
+            grpText.Size = new Size(223, 102);
             grpText.TabIndex = 5;
             grpText.TabStop = false;
             grpText.Text = "Text-Eingabe";
+            grpText.Enter += grpText_Enter;
             // 
             // btnAufModulBringen
             // 
-            btnAufModulBringen.Location = new Point(19, 131);
+            btnAufModulBringen.Location = new Point(11, 66);
+            btnAufModulBringen.Margin = new Padding(2, 2, 2, 2);
             btnAufModulBringen.Name = "btnAufModulBringen";
-            btnAufModulBringen.Size = new Size(339, 48);
+            btnAufModulBringen.Size = new Size(198, 24);
             btnAufModulBringen.TabIndex = 1;
             btnAufModulBringen.Text = "auf Modul bringen";
             btnAufModulBringen.UseVisualStyleBackColor = true;
             // 
             // textBox
             // 
-            textBox.Location = new Point(19, 65);
+            textBox.Location = new Point(11, 32);
+            textBox.Margin = new Padding(2, 2, 2, 2);
             textBox.Name = "textBox";
-            textBox.Size = new Size(339, 42);
+            textBox.Size = new Size(199, 27);
             textBox.TabIndex = 0;
             // 
             // timer
@@ -257,16 +273,15 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2029, 443);
+            ClientSize = new Size(1122, 222);
             Controls.Add(grpText);
             Controls.Add(grpSpeichern);
             Controls.Add(grpColor);
             Controls.Add(btnScroll);
             Controls.Add(btnSendeDaten);
             Controls.Add(matrixDisplay);
-            Margin = new Padding(5, 6, 5, 6);
             Name = "Form1";
             Text = "Form1";
             grpColor.ResumeLayout(false);
