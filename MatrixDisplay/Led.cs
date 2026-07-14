@@ -2,7 +2,6 @@
 {
     public class Led
     {
-        // TODO Farbe 
         private bool istAn;
         private int globalIndex;
         private int localIndex;
@@ -13,6 +12,8 @@
         private int ledPixelBreite;
         private int ledPixelHoehe;
         private Modul parentModul;
+        //neu
+        private Color farbe;
 
         public Led(int zeile, int spalte,
             int breite, int hoehe,
@@ -21,12 +22,12 @@
             parentModul = modul;
             ledPixelBreite = breite;
             ledPixelHoehe = hoehe;
-            
+
             this.zeile = zeile;
             this.spalte = spalte;
 
             int modulNr = parentModul.GetModulNr();
-            
+
             int spaltenAnzahl = parentModul.GetSpalten();
             int zeilenAnzahl = parentModul.GetZeilen();
 
@@ -44,22 +45,26 @@
         {
             return globalIndex;
         }
+
         public bool IstAn()
         {
             return istAn;
         }
 
+        // neu
+        public void SetzeFarbe(int r, int g, int b)
+        {
+            farbe = Color.FromArgb(r, g, b);
+        }
+
+        
+
         public void UebernehmeWerteVon(Led other)
         {
             this.istAn = other.istAn;
-            // TODO Farbe übernehmen
+            // neu
+            this.farbe = other.farbe;
         }
-
-        // TODO 
-        // public void SetzeFarbe()
-        //
-        
-
 
         public void Einschalten()
         {
@@ -76,7 +81,8 @@
             if (istAn)
             {
                 istAn = false;
-            }else
+            }
+            else
             {
                 istAn = true;
             }
@@ -84,23 +90,12 @@
 
         public void ZeichneLed(Graphics graphics)
         {
-            // TODO Farbe
-            int r = 0; 
-            int g = 255; 
-            int b = 0;
-            Color color = Color.FromArgb(r, g, b);            
-            SolidBrush meinGruen = new SolidBrush(color);
+            using SolidBrush brush = new SolidBrush(farbe);
 
-            if(istAn)
+            if (istAn)
             {
-                graphics.FillRectangle(meinGruen, xPos, yPos, ledPixelBreite, ledPixelHoehe);
+                graphics.FillRectangle(brush, xPos, yPos, ledPixelBreite, ledPixelHoehe);
             }
-            meinGruen.Dispose();
-
         }
-
-
-
-
     }
 }

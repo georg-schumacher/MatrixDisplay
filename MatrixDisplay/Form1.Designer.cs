@@ -248,6 +248,7 @@
             grpText.TabIndex = 5;
             grpText.TabStop = false;
             grpText.Text = "Text-Eingabe";
+            grpText.Enter += grpText_Enter;
             // 
             // btnAufModulBringen
             // 
