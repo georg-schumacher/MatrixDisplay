@@ -21,7 +21,7 @@ namespace MatrixDisplay
             this.anzahlZeilen = zeilen;
             this.anzahlSpalten = spalten;
             ledArray = new Led[zeilen, spalten];
-            
+
             int ledBreite = breite / anzahlSpalten;
             int ledHoehe = hoehe / anzahlZeilen;
 
@@ -30,10 +30,10 @@ namespace MatrixDisplay
                 for (int s = 0; s < anzahlSpalten; s++)
                 {
                     Led neueLed;
-                    neueLed = new Led(z,s,
+                    neueLed = new Led(z, s,
                         ledBreite, ledHoehe, this);
-                    ledArray[z,s] = neueLed;
-             
+                    ledArray[z, s] = neueLed;
+
                 }
             }
 
@@ -42,6 +42,11 @@ namespace MatrixDisplay
         {
             // TODO
             return null;
+        }
+
+        public Led[,] getLedArray()
+        {
+            return ledArray;
         }
 
         public Led getLedByPixel(int x, int y)
@@ -82,9 +87,30 @@ namespace MatrixDisplay
             }
         }
 
+        internal void Scrollen()
+        {
+            // Modul.Scrollen
+
+            // Phase 1
+            // TODO: Erste Spalte wegsichern als Led-Array !!
+
+            // Phase 2
+            // jede Led: eins nach-links schieben (Erste Spalte geht verloren)
+            for (int s = 0; s < anzahlSpalten - 1; s++)
+            {
+                for (int z = 0; z < anzahlZeilen; z++)
+                {
+                    Led led_links = ledArray[z, s];
+                    Led led_rechts = ledArray[z, s + 1];
+                    led_links.UebernehmeWerteVon(led_rechts);
+                }
+            }
+
+            // Phase 3
+            // TODO: 
 
 
 
-
+        }
     }
 }

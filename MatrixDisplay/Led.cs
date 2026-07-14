@@ -2,6 +2,7 @@
 {
     public class Led
     {
+        // TODO Farbe 
         private bool istAn;
         private int globalIndex;
         private int localIndex;
@@ -24,9 +25,6 @@
             this.zeile = zeile;
             this.spalte = spalte;
 
-
-            // TODO
-
             int modulNr = parentModul.GetModulNr();
             
             int spaltenAnzahl = parentModul.GetSpalten();
@@ -41,15 +39,29 @@
 
             globalIndex = localIndex 
                 + modulNr * (zeilenAnzahl * spaltenAnzahl);
-            
-            
 
         }
 
+        public int getGlobalIndex()
+        {
+            return globalIndex;
+        }
         public bool IstAn()
         {
             return istAn;
         }
+
+        public void UebernehmeWerteVon(Led other)
+        {
+            this.istAn = other.istAn;
+            // TODO Farbe übernehmen
+        }
+
+        // TODO 
+        // public void SetzeFarbe()
+        //
+        
+
 
         public void Einschalten()
         {
@@ -74,6 +86,7 @@
 
         public void ZeichneLed(Graphics graphics)
         {
+            // TODO Farbe
             int r = 0; 
             int g = 255; 
             int b = 0;
